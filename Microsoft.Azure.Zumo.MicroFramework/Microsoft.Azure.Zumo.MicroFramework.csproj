@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AssemblyName>Microsoft.Azure.Zumo.MicroFramework</AssemblyName>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Microsoft.Azure.Zumo.MicroFramework</RootNamespace>
+    <ProjectTypeGuids>{b69e3092-b931-443c-abe7-7e7b65f2a37f};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{06DCF1E5-6DF6-49F4-BF1C-83F301999665}</ProjectGuid>
+    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+    <NetMfTargetsBaseDir Condition="'$(NetMfTargetsBaseDir)'==''">$(MSBuildExtensionsPath32)\Microsoft\.NET Micro Framework\</NetMfTargetsBaseDir>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE,MF_FRAMEWORK_VERSION_V4_3</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
+  <ItemGroup>
+    <Compile Include="Core\IMobileServiceEntity.cs" />
+    <Compile Include="Core\IMobileServiceTable.cs" />
+    <Compile Include="Core\IMobileServiceTable.Micro.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\MobileServiceClient.cs" />
+    <Compile Include="Core\MobileServiceTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\MobileServiceTable.Micro.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\MobileServiceUser.cs" />
+    <Compile Include="Core\Resources.cs" />
+    <Compile Include="Core\TypeExtensions.cs" />
+    <Compile Include="Helper\MobileServicesTableSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Table\SerializableType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.SPOT.Native">
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Http" />
+    <Reference Include="System.IO" />
+    <Reference Include="System.Text.RegularExpressions" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Blob\" />
+    <Folder Include="IServiceFilter\" />
+  </ItemGroup>
+</Project>

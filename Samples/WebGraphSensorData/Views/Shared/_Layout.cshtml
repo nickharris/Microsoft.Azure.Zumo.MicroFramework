@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @*Add JQPlot references, note you might want to bundle these*@
+    <script type="text/javascript" src="http://js.pusher.com/1.12/pusher.min.js" />
+    @Styles.Render("~/Content/css")        
+    @Scripts.Render("~/bundles/modernizr")
+
+
+</head>
+<body>
+    @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+
+    @*Add JQPlot references, note you might want to bundle these*@
+    @Scripts.Render("~/Scripts/JQuery.jqplot.min.js")
+    @Scripts.Render("~/Scripts/jqplot.dateAxisRenderer.min.js")    
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

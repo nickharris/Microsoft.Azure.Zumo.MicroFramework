@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = ".NET MicroFramework, Mobile Services + Pusher demo";
+}
+
+<h2>Mobile Services - Sensor Demo</h2>
+<p> Below a graph will be rendered when you receive your first data point ~every 5 seconds - if i have my device on! so something to read while you wait</p>
+
+
+<div id="chartdiv" style="height:600px;width:800px;display:none"></div>
+<br />
+<div id="lightdiv" style="height:600px;width:800px;display:none"></div>
+
+
+<p> This is a little demo i pulled together over the weekend to demonstrate that we can do some really cool things using Mobile Services and embedded devices! - the dataflow is basically the following:</p>
+<ul>
+    <li>Temperature and Humidity data captured on using .NET MicroFramework 4.2 on Gadgeteer GHI FEZ Spider</li>
+    <li>Data is then inserted into mobile services using a thin vslice of the Mobile Services SDK that i ported to .NET MF. It was slow going as in the .NET MF there is no support for generics, json serialization, no linq and limited reflection capabilities sort of like coding back in .NET 1.1 </li>
+    <li>Mobile Service Insert Script sends collected data to this browser via Pusher - one of our store partners</li>
+    <li>Windows Azure Web Site Web client subscribed with Pusher and shows update live data on graph in near real time</li>
+</ul>
+
+<p>I will share the source and details of how this was built on my blog sometime next week so in the meantime please limit distribution to internal folks only as I am currently only on the free tier of Pusher that only allows 20 concurrent connections</p>
+<p>and yes i have spent absolutely no time on the UI here :).  You can read full details of how this was built at <a href="http://www.nickharris.net">http://www.nickharris.net</a></p>
+
+@section Scripts {
+    <script>       
+        
+        $(document).ready(function () {           
+            var temp = [];
+            var humidity = [];
+            var light = [];
+            var start = 0;
+            var plot;
+            var lightPlot;
+       
+            //use Pusher.com to bind to our sensor updates channel. 
+            //3 lines of code only!
+            var pusher = new Pusher('<replace with your Pusher Key>', { encrypted: true });
+            var channel = pusher.subscribe('sensor-updates');            
+            channel.bind('nicks-office', function (data) {                
+
+                //Todo: need to clean this up              
+                // the rest of this deals with just graphing the data
+                if (temp.length == 10) {                    
+                    temp.shift();
+                    humidity.shift();//both are of same length so not concerned on testing length of humidity
+                    light.shift();
+                    plot.axes.xaxis.min = temp[0][0];
+                    plot.axes.xaxis.max = plot.axes.xaxis.min + 10;
+                    lightPlot.axes.xaxis.min = light[0][0];
+                    lightPlot.axes.xaxis.max = lightPlot.axes.xaxis.min + 10;
+                }
+                $("#chartdiv").css("display", "block");
+                $("#lightdiv").css("display", "block");
+                temp.push([data.id, data.Temp]);
+                humidity.push([data.id, data.Humidity]);
+                light.push([data.id, data.Light]);
+
+                if (plot) {
+                    plot.series[0].data = temp;
+                    plot.series[1].data = humidity;
+                } else {                   
+                    createPlot();
+                    plot.axes.xaxis.min = data.id;
+                    plot.axes.xaxis.max = plot.axes.xaxis.min + 10;
+                }
+
+                if (lightPlot) {
+                    lightPlot.series[0].data = light;                    
+                } else {                   
+                    createLightPlot();
+                    lightPlot.axes.xaxis.min = data.id;
+                    lightPlot.axes.xaxis.max = lightPlot.axes.xaxis.min + 10;
+                }
+                
+                plot.replot();
+                lightPlot.replot();
+            });
+
+            var createPlot = function () {
+                plot = $.jqplot('chartdiv', [temp, humidity],
+                 {
+                     title: 'Temp (Deg Celsius) Vs Humidity',
+
+                     series: [
+                         {
+                             lineWidth: 2,
+                             markerOptions: { style: 'dimaond' }
+                         },
+                         {
+                             lineWidth: 2,
+                             markerOptions: { size: 7, style: "x" }
+                         }
+                     ],
+                     axes: {
+                         xaxis: {
+                             label: 'reading',
+                             labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+                         }
+                     },
+                     yaxis: {
+                         label: 'temp vs humidity',
+                         labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                         min: 0,
+                         max: 100
+                     }
+                 });
+            }
+
+              var createLightPlot = function () {              
+                  lightPlot = $.jqplot('lightdiv', [light],
+                   {
+                       title: 'Light %',
+                   
+                       series: [
+                           {
+                               lineWidth: 2,
+                               markerOptions: { style: 'dimaond' }
+                           }
+                       ],
+                       axes:{
+                           xaxis: {                           
+                               label: 'reading',
+                               labelRenderer: $.jqplot.CanvasAxisLabelRenderer,                           
+                               pad: 0,
+                               padMax: 1,
+                               padMin: 1                          
+                           }},
+                       yaxis:{
+                           label:'Light %',
+                           labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                           min: 0,
+                           max: 100
+                       }
+                   });                
+            }
+
+        });
+     
+</script>
+}
+
+ 

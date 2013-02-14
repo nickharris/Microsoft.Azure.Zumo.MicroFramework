@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Azure.Zumo.MicroFramework", "Microsoft.Azure.Zumo.MicroFramework\Microsoft.Azure.Zumo.MicroFramework.csproj", "{06DCF1E5-6DF6-49F4-BF1C-83F301999665}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceSensorDemoMobileServices", "Samples\DeviceClient\SensorDemoMobileServices\DeviceSensorDemoMobileServices.csproj", "{1671FD55-821C-46B4-A463-6AA47914BFD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGraphSensorDataDemo", "Samples\WebGraphSensorData\WebGraphSensorDataDemo.csproj", "{82AB1F0C-2C8E-4FAE-B9B3-62F3996E9BB7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{614900DA-2720-4329-A8C8-ED6468329F62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06DCF1E5-6DF6-49F4-BF1C-83F301999665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06DCF1E5-6DF6-49F4-BF1C-83F301999665}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06DCF1E5-6DF6-49F4-BF1C-83F301999665}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06DCF1E5-6DF6-49F4-BF1C-83F301999665}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1671FD55-821C-46B4-A463-6AA47914BFD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1671FD55-821C-46B4-A463-6AA47914BFD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1671FD55-821C-46B4-A463-6AA47914BFD8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1671FD55-821C-46B4-A463-6AA47914BFD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1671FD55-821C-46B4-A463-6AA47914BFD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1671FD55-821C-46B4-A463-6AA47914BFD8}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{82AB1F0C-2C8E-4FAE-B9B3-62F3996E9BB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82AB1F0C-2C8E-4FAE-B9B3-62F3996E9BB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82AB1F0C-2C8E-4FAE-B9B3-62F3996E9BB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82AB1F0C-2C8E-4FAE-B9B3-62F3996E9BB7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{82AB1F0C-2C8E-4FAE-B9B3-62F3996E9BB7} = {614900DA-2720-4329-A8C8-ED6468329F62}
+		{1671FD55-821C-46B4-A463-6AA47914BFD8} = {614900DA-2720-4329-A8C8-ED6468329F62}
+	EndGlobalSection
+EndGlobal
