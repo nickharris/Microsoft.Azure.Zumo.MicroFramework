@@ -49,7 +49,6 @@ Create a new instance of the MobileServiceClient with this you will be able to i
 
 New up an instance of your DTO and call GetTable and Insert on the MobileServiceClient
 
-   //create a new sensor reading and set the values
     var reading = new SensorReading()
     {
         SensorID = "nicks-office", //can you believe i have to share my office with http://ntotten.com ?
